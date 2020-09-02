@@ -41,10 +41,13 @@ if __name__ == "__main__":
                     break
 
                 comments = []
-                n_comments = driver.find_element_by_class_name("cmt_paging")
-                n_comments = n_comments.find_elements_by_tag_name("a")
-                last_comment_page = len(n_comments) + 1
-
+                try:
+                    n_comments = driver.find_element_by_class_name("cmt_paging")
+                    n_comments = n_comments.find_elements_by_tag_name("a")
+                    last_comment_page = len(n_comments) + 1
+                except NoSuchElementException:
+                    last_comment_page = 0
+                
                 title = driver.find_element_by_class_name("title_subject")
                 content = driver.find_element_by_class_name("writing_view_box")
                 content = content.find_elements_by_tag_name("div")
@@ -61,8 +64,8 @@ if __name__ == "__main__":
                 for comment in comments:
                     save_file.write(comment + '\n')
                 save_file.write("\n\n\n")
-            except (NoSuchElementException, TimeoutException):
-                logging.warning(f"Page #{page_idx} reloading...")
+            except (NoSuchElementException, TimeoutException) as e:
+                logging.warning(f"Page #{page_idx} : {e}")
             else:
                 break
 
