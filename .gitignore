@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+dc_crawler.egg-info
 develop-eggs/
 dist/
 downloads/

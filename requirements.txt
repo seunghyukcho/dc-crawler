@@ -1,5 +1,2 @@
-requests
 bs4
 selenium
-typed-argument-parser
-tqdm
